@@ -1,3 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: stkit.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: stkit.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+* STudentsKit module.
+* @module modules/STKit
+* @public
+* @author chupilin yauheni &lt;e.chupilin@gmail.com>
+*/
+
+/** Module contains functions that may be useful in their daily work.
+ */
+
 exports.STKit = (function () {
 
   function isArrayLikeFun(obj) {
@@ -6,7 +44,7 @@ exports.STKit = (function () {
       return true;
     }
 
-    if (typeof(obj) != 'object' && typeof(obj) != 'string') {
+    if (typeof(obj) != 'object' &amp;&amp; typeof(obj) != 'string') {
       return false;
     }
 
@@ -15,7 +53,7 @@ exports.STKit = (function () {
     }
 
     var l = obj.length;
-    if (typeof(l) != 'number' || l < 0) {
+    if (typeof(l) != 'number' || l &lt; 0) {
       return false;
     }
 
@@ -25,8 +63,8 @@ exports.STKit = (function () {
 
     var propertys = (Object.getOwnPropertyNames(obj));
 
-    for (var j = 0; j < obj.length; j++) {
-      if (propertys.indexOf(j + '') < 0) {
+    for (var j = 0; j &lt; obj.length; j++) {
+      if (propertys.indexOf(j + '') &lt; 0) {
         return false;
      }
    }
@@ -66,7 +104,7 @@ exports.STKit = (function () {
     return array;
 
     function hasNext(str) {
-      for(var i = 0; i <= str.length - 1; i++) {
+      for(var i = 0; i &lt;= str.length - 1; i++) {
         switch (str[i]) {
           case SEMICOLON.charAt(0): return true;
           case SEMICOLON.charAt(1): return true;
@@ -78,12 +116,12 @@ exports.STKit = (function () {
 
     function nextElement(str) {
     var isFunBody = false;
-    for(var i = 0; i <= str.length - 1; i++) {
-        for(var j = 0; j <= SEMICOLON.length - 1; j++) {
+    for(var i = 0; i &lt;= str.length - 1; i++) {
+        for(var j = 0; j &lt;= SEMICOLON.length - 1; j++) {
           if (str.charAt(i) == '|') {
             isFunBody = !isFunBody;
           }
-          if (!isFunBody && str.charAt(i) == SEMICOLON.charAt(j)) {
+          if (!isFunBody &amp;&amp; str.charAt(i) == SEMICOLON.charAt(j)) {
             return str.slice(0,i);
           }
         }
@@ -92,7 +130,7 @@ exports.STKit = (function () {
     }
 
     function deleteSemicolonAtStart(str) {
-      for(var i = 0; i <= SEMICOLON.length - 1; i++){
+      for(var i = 0; i &lt;= SEMICOLON.length - 1; i++){
       if (str.charAt(0) == SEMICOLON[i]) {
         return str.slice(1,str.length);
       }
@@ -103,12 +141,12 @@ exports.STKit = (function () {
     function deleteElementAtStart(str) {
       var isFunBody = false;
 
-      for(var i = 0; i <= str.length - 1; i++) {
-        for(var j = 0; j <= SEMICOLON.length - 1; j++) {
+      for(var i = 0; i &lt;= str.length - 1; i++) {
+        for(var j = 0; j &lt;= SEMICOLON.length - 1; j++) {
           if (str.charAt(i) == '|') {
             isFunBody = !isFunBody;
           }
-          if (!isFunBody && str.charAt(i) == SEMICOLON.charAt(j)) {
+          if (!isFunBody &amp;&amp; str.charAt(i) == SEMICOLON.charAt(j)) {
           return str.slice(i,str.length);
           }
         }
@@ -117,7 +155,7 @@ exports.STKit = (function () {
     }
 
     function isNextObj(str) {
-      for(var i = 0; i <= str.length - 1; i++) {
+      for(var i = 0; i &lt;= str.length - 1; i++) {
         switch (str[i]) {
           case SEMICOLON.charAt(0): return true;
           case SEMICOLON.charAt(1): return false;
@@ -128,7 +166,7 @@ exports.STKit = (function () {
 
     function isFun(str) {
       var reg = new RegExp('^\\|.+\\|$');
-      return (str.search(reg) < 0) ? false : true;
+      return (str.search(reg) &lt; 0) ? false : true;
     }
 
     function deleteSemicolons(str) {
@@ -138,12 +176,12 @@ exports.STKit = (function () {
 
     function getFunBody(str) {
       str = deleteSemicolons(str);
-      return (str.search(/^function/) < 0) ? str : str.match(/{.+}/i);
+      return (str.search(/^function/) &lt; 0) ? str : str.match(/{.+}/i);
     }
 
     function getFunAtrr(str) {
       var array = [];
-      str = (str.search(/^|function/) < 0) ? '()' : (str.match(/\(.+\)/i)) + '';
+      str = (str.search(/^|function/) &lt; 0) ? '()' : (str.match(/\(.+\)/i)) + '';
       str = deleteSemicolons(str);
       array = str.split(',');
       return array;
@@ -219,11 +257,67 @@ exports.STKit = (function () {
       makeObjToReturn();
     }
   }
+
+  // Try to use Revealing Module Pattern.
         return {
+            /** Check is Object array like.
+            * @function
+            * @param {Object} obj - To scan object.
+            * @type {boolean}
+            */
             isArrayLike: isArrayLikeFun,
+
+            /** It creates an array of objects from the line split ';'
+            * The string can contain the characters:
+            * ':' - new nested array
+            * '| ... |' - body functions
+            * @function
+            * @param {string} str - From the input data string.
+            * @type {array}
+            */
             semicolonSon: semicolonSonFun,
+
+            /** The function creates a cache for other functions,
+            * having a great time working.
+            * When re-input data is returned from the cache..
+            * @function
+            * @param {function} fun - Function value which has to be memorized.
+            */
             memoize: memoizeFun,
+
+            /** Function receive object as argument,
+            * and remove any behavior related properties from it.
+            * Leave object with only state related properties.
+            * @function
+            * @param {Object} obj - To debehaviorize object.
+            * @param {boolean} isBehaviorSeparate - true to mutate existing object
+            * and return array with all behavior in it depending.
+            * @type {object}
+            */
             debehaviorize: debehaviorizeFun
         };
 
     })();
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-modules_STKit.html">modules/STKit</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Wed Dec 28 2016 13:20:46 GMT+0300 (Беларусь (зима))
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
